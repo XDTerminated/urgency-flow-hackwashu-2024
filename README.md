@@ -54,7 +54,7 @@ This is a monorepo containing both the frontend and backend:
 │   │   ├── saved_models/
 │   │   └── src/
 │   ├── manage.py
-│   ├── requiements.txt # Python dependencies
+│   ├── pyproject.toml  # Python dependencies (uv)
 │   └── vercel.json     # Backend deployment config
 │
 ├── README.md
@@ -63,6 +63,36 @@ This is a monorepo containing both the frontend and backend:
 ```
 
 ## How To Use
+
+### Development Setup
+
+**Prerequisites:**
+- Python 3.11+
+- [uv](https://github.com/astral-sh/uv) (fast Python package manager)
+
+**Backend:**
+```bash
+cd backend
+uv sync                          # Install dependencies
+uv run python manage.py migrate  # Apply migrations
+uv run python manage.py runserver # Start server at http://127.0.0.1:8000
+```
+
+**Frontend:**
+```bash
+cd frontend
+python -m http.server 3000       # Serve at http://localhost:3000
+```
+
+### Deployment
+
+The project is configured for Vercel deployment:
+- **Frontend**: Deploy the `frontend/` directory as a static site
+- **Backend**: Deploy the `backend/` directory with the Python runtime
+
+Set the following environment variables for production:
+- `DJANGO_SECRET_KEY`: A secure secret key
+- `DJANGO_DEBUG`: Set to `false` for production
 
 To see this project in action, view our latest deployments!
 

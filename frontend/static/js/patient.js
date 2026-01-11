@@ -1051,14 +1051,9 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function getCSVFromOptions(optionMap) {
-  // Convert the map of options into CSV format
-  const headers = Object.keys(optionMap).join(","); // Create the header row
-  const values = Object.values(optionMap).join(","); // Create the value row
-
-  // Combine the headers and values into CSV string
-  const csvData = `${headers}\n${values}`;
-
-  return csvData;
+  // Return the option map directly as an object (not CSV string)
+  // This allows proper spreading when combining with other data
+  return { ...optionMap };
 }
 
 document.addEventListener("DOMContentLoaded", function () {
