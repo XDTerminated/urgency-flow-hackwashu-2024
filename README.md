@@ -1,7 +1,7 @@
 
 <h1 align="center">
   <br>
-  <a href="https://wash-u-hackathon24.vercel.app/index.html"><img src="output-onlinepngtools.png" alt="UrgencyFlow" width="200"></a>
+  <a href="https://wash-u-hackathon24.vercel.app/index.html"><img src="frontend/output-onlinepngtools.png" alt="UrgencyFlow" width="200"></a>
   <br>
   UrgencyFlow
   <br>
@@ -12,6 +12,7 @@
 
 <p align="center">
   <a href="#key-features">Key Features</a> •
+  <a href="#project-structure">Project Structure</a> •
   <a href="#how-to-use">How To Use</a> •
   <a href="#credits">Credits</a> •
   <a href="#license">License</a>
@@ -19,18 +20,47 @@
 
 
 
-![screenshot](static/media/website_preview.png)
+![screenshot](frontend/static/media/website_preview.png)
 <p align="center">
   <a href="https://www.loom.com/share/4cc19a458dea4a7fa733a0f4b6aed368">Loom Explanation Video</a>
 </p>
 
 ## Key Features
 
-* Automatically sort patients based on AI assigned serverity level.
+* Automatically sort patients based on AI assigned severity level.
   - Instantly view what patients must be admitted first, possibly saving their lives.
 * Add Entries
   - Patient is able to be added to the queue with few inputs needed.
-* View Patient information  
+* View Patient information
+
+## Project Structure
+
+This is a monorepo containing both the frontend and backend:
+
+```
+/
+├── frontend/           # Static frontend (HTML, CSS, JavaScript)
+│   ├── index.html      # Main application page
+│   ├── static/         # CSS, JS, and media assets
+│   │   ├── css/
+│   │   ├── js/
+│   │   └── media/
+│   └── vercel.json     # Frontend deployment config
+│
+├── backend/            # Django REST API + ML Model
+│   ├── api/            # Django REST API app
+│   ├── backend/        # Django project settings
+│   ├── model/          # PyTorch ML model and training
+│   │   ├── saved_models/
+│   │   └── src/
+│   ├── manage.py
+│   ├── requiements.txt # Python dependencies
+│   └── vercel.json     # Backend deployment config
+│
+├── README.md
+├── LICENSE
+└── .gitignore
+```
 
 ## How To Use
 
