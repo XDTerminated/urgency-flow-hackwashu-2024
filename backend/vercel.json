@@ -1,4 +1,5 @@
 {
+    "installCommand": "curl -LsSf https://astral.sh/uv/install.sh | sh && ~/.local/bin/uv export --frozen --no-hashes > requirements.txt",
     "builds": [
         {
             "src": "backend/wsgi.py",

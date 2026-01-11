@@ -30,11 +30,13 @@ class EsiModel(nn.Module):
 
 
 def load_model():
+    import os
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     model_state_dict = torch.load(
-        "api/model/saved_models/esi_model.pth", weights_only=True
+        os.path.join(base_dir, "saved_models/esi_model.pth"), weights_only=True
     )
-    scaler = load("api/model/saved_models/scaler.joblib")
-    feature_columns = load("api/model/saved_models/feature_columns.joblib")
+    scaler = load(os.path.join(base_dir, "saved_models/scaler.joblib"))
+    feature_columns = load(os.path.join(base_dir, "saved_models/feature_columns.joblib"))
 
     model = EsiModel(len(feature_columns))
     model.load_state_dict(model_state_dict)
@@ -55,7 +57,6 @@ def create_features(df):
 
 
 def preprocess_data(df, scaler, feature_columns):
-    print(df)
     df = pd.get_dummies(df, drop_first=True)
     df = create_features(df)
 
@@ -87,19 +88,15 @@ def predict_esi(model, input_tensor):
 def predict_from_dataframe(input_data):
     # Load model, scaler, and feature columns
     model, scaler, feature_columns = load_model()
-    print("Hello")
 
     # Preprocess the input data
     scaled_input = preprocess_data(input_data, scaler, feature_columns)
-    print("Hello2")
 
     # Convert to PyTorch tensor
     input_tensor = torch.tensor(scaled_input, dtype=torch.float32)
-    print("Hello3")
 
     # Make predictions
     esi_scores, probabilities = predict_esi(model, input_tensor)
-    print("Hello4")
 
     # Return the predictions and probabilities
     return esi_scores, probabilities

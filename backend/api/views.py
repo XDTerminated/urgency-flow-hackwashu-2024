@@ -11,12 +11,9 @@ class ESIPredictionView(APIView):
         return response
 
     def post(self, request) -> Response:
-        print(len(request.data))
         try:
             input_data = pd.DataFrame([request.data])
-            print(input_data)
             esi_scores, probabilities = predict_from_dataframe(input_data)
-            print(esi_scores)
             response = {
                 "esi_scores": esi_scores.tolist(),
                 "probabilities": [prob.tolist() for prob in probabilities],
